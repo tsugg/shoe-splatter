@@ -1,0 +1,63 @@
+services:
+  shoe-splatter:
+    image: shoe-splatter/shoe-splatter
+    container_name: shoe-splatter
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    tty: true
+    stdin_open: true
+    command: /bin/bash
+
+  masks:
+    image: shoe-splatter/masks
+    container_name: masks
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
+    build:
+      context: ./extensions/Grounded-SAM-2
+      dockerfile: Dockerfile
+    environment:
+      - PYTHONUNBUFFERED=1
+    depends_on:
+      - shoe-splatter
+    tty: true
+    stdin_open: true
+    command: /bin/bash
+    volumes:
+      - ../shoe-splatter-data:/app/data
+      - ../shoe-splatter-results:/app/results
+  
+  splat:
+    image: shoe-splatter/splat
+    container_name: splat
+    ports:
+      - "7007:7007"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
+    build:
+      context: ./extensions/nerfstudio
+      dockerfile: Dockerfile
+    environment:
+      - PYTHONUNBUFFERED=1
+    depends_on:
+      - shoe-splatter
+    tty: true
+    stdin_open: true
+    command: /bin/bash
+    volumes:
+      - ../shoe-splatter-data:/app/data
+      - ../shoe-splatter-results:/app/results
+      - ./configs:/app/configs
+
+networks:
+  default:
+    name: shoe-splatter-network

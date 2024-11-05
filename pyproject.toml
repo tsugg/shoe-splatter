@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "shoe-splatter"
+version = "0.1"
+description = "A project for building 3DGS models of shoes"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    {name = "Thomas Sugg", email = "tomysugg@gmail.com"},
+]
+dependencies = [
+    "numpy",
+    "wheel",
+    "transformers",
+    "toml",
+    "tqdm",
+    "pandas",
+    "matplotlib",
+    "opencv-python",
+    "supervision",
+    "addict",
+    "yapf",
+    "pycocotools",
+    "open3d",
+    "timm"
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["shoe_splatter*", "extensions*"]
+exclude = ["tests*"]
+
+[tool.setuptools.package-data]
+"shoe_splatter" = ["**/*"]
+"extensions" = ["**/*"]
+
+[tool.pip]
+extra-index-url = ["https://download.pytorch.org/whl/cu118"]
+
+[tool.black]
+line-length = 100
+target-version = ['py310']
+
+[tool.isort]
+profile = "black"
+line_length = 100
+multi_line_output = 3
+
+[tool.mypy]
+ignore_missing_imports = true
+strict_optional = true
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q"
+
+[project.urls]
+"Homepage" = "https://github.com/tsugg/shoe-splatter"
+"Bug Tracker" = "https://github.com/tsugg/shoe-splatter/issues"

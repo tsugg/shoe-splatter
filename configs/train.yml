@@ -1,0 +1,14 @@
+# Experiment name. If None, will automatically be set to dataset name.
+experiment-name: shoe-splatter
+
+# Number of steps between saves.
+steps-per-save: 2000
+
+# Number of steps between single eval images.
+steps-per-eval-image: 100
+
+# Maximum number of iterations to run.
+max-num-iterations: 7000
+
+# Whether or not to use mixed precision for training.
+mixed-precision: false

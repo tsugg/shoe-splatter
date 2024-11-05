@@ -1,0 +1,48 @@
+# Video processing configuration
+
+# Verbosity setting
+verbose: true  # If True, print extra logging.
+
+# Camera settings
+camera_type: perspective
+
+# Matching method (use sequential for video)
+matching_method: sequential
+
+# Structure from motion tool
+sfm_tool: colmap  # Options: any, colmap, hloc
+# Colmap will use sift features, hloc can use many modern methods such as superpoint features and superglue matcher
+
+# Refinement options
+refine_pixsfm: false  # If True, runs refinement using Pixel Perfect SFM. Only works with hloc sfm_tool
+refine_intrinsics: false  # If True, do bundle adjustment to refine intrinsics. Only works with colmap sfm_tool
+
+# Feature extraction and matching
+feature_type: any
+matcher_type: any
+
+# Image processing
+num_downscales: 0 # Number of times to downscale the images. Downscales by 2 each time.
+skip_colmap: false  # If True, skips COLMAP and generates transforms.json if possible.
+skip_image_processing: true  # If True, skips copying and downscaling of images and only runs COLMAP if possible and enabled
+
+# GPU usage
+gpu: true  # If True, use GPU.
+
+# Depth-related settings
+use_sfm_depth: false  # If True, export and use depth maps induced from SfM points.
+include_depth_debug: false  # If use_sfm_depth and this flag is True, also export debug images showing SfM overlaid upon input images.
+
+# Image dimension assumptions
+same_dimensions: true  # Whether to assume all images are same dimensions and so to use fast downscaling with no autorotation.
+
+# Camera mode
+use_single_camera_mode: true  # Whether to assume all images taken with the same camera characteristics, set to False for multiple cameras in colmap (only works with hloc sfm_tool).
+
+# Image cropping
+percent_radius_crop: 1.0  # Create circle crop mask. The radius is the percent of the image diagonal.
+
+# Video frame selection
+num_frames_target: 300
+
+keep_original_world_coordinate: true

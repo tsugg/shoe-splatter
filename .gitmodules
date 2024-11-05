@@ -1,0 +1,6 @@
+[submodule "extensions/nerfstudio"]
+	path = extensions/nerfstudio
+	url = https://github.com/tsugg/nerfstudio.git
+[submodule "extensions/Grounded-SAM-2"]
+	path = extensions/Grounded-SAM-2
+	url = https://github.com/tsugg/Grounded-SAM-2
