@@ -29,8 +29,6 @@ Follow these steps to set up the shoe-splatter repository and its dependencies:
 ```sh
 git clone https://github.com/tsugg/shoe-splatter.git --recursive
 cd shoe-splatter
-git submodule update --init --recursive
-git lfs fetch --all
 ```
 
 2. Download model files:
